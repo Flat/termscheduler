@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="5">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="4"
+        android:background="@color/colorPrimaryDark">
+
+
+        <TextView
+            android:id="@+id/className"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="72dp"
+            android:text="Class Name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/startDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/start_date"
+            app:layout_constraintStart_toStartOf="@id/className"
+            app:layout_constraintTop_toBottomOf="@+id/className"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="24dp"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="1/2/3"
+            app:layout_constraintStart_toEndOf="@id/startDateLabel"
+            app:layout_constraintTop_toTopOf="@+id/startDateLabel"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/endDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/end_date"
+            app:layout_constraintStart_toStartOf="@id/startDateLabel"
+            app:layout_constraintTop_toBottomOf="@+id/startDateLabel"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="1/4/3"
+            app:layout_constraintStart_toEndOf="@id/endDateLabel"
+            app:layout_constraintTop_toTopOf="@+id/endDateLabel"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="24dp"
+            android:textColor="@android:color/white"/>
+
+        <ImageView
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/TitleIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_assignment_black_24dp"
+            android:tint="@android:color/white"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_add_black_24dp"
+            android:tint="@android:color/white"/>
+        <include
+            layout="@layout/bottom_list"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical" />
+
+    </FrameLayout>
+
+</LinearLayout>
