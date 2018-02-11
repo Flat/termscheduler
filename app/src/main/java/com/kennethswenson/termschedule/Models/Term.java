@@ -4,8 +4,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 
-import com.kennethswenson.termschedule.Adapters.ClassStatusTypeConverter;
 import com.kennethswenson.termschedule.Adapters.ZonedDateTimeTypeConverter;
+import com.kennethswenson.termschedule.utils.PreferencesHelper;
 
 import java.time.ZonedDateTime;
 
@@ -15,6 +15,7 @@ public class Term {
 
     @PrimaryKey(autoGenerate = true)
     private Integer id;
+    private String UUID;
     private String term;
     private ZonedDateTime startDate;
     private ZonedDateTime endDate;
@@ -23,6 +24,7 @@ public class Term {
         this.term = term;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.UUID = PreferencesHelper.getUUID();
     }
 
     public Integer getId() {
@@ -55,6 +57,14 @@ public class Term {
 
     public void setEndDate(ZonedDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
     }
 
     @Override

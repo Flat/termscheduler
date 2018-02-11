@@ -4,11 +4,14 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.kennethswenson.termschedule.Models.Assessment;
+import com.kennethswenson.termschedule.Models.Goal;
 import com.kennethswenson.termschedule.Models.Mentor;
+import com.kennethswenson.termschedule.Models.ScheduledNotification;
 import com.kennethswenson.termschedule.Models.Term;
 import com.kennethswenson.termschedule.Models.TermClass;
 
@@ -28,6 +31,9 @@ public interface DbDao {
     @Query("SELECT * FROM mentor WHERE mentor.classId == :id")
     LiveData<List<Mentor>> getMentorsByClassId(Integer id);
 
+    @Query("SELECT * FROM mentor WHERE mentor.id == :id")
+    Mentor getMentorById(Integer id);
+
     @Query("SELECT * FROM termclass WHERE termclass.id == :id")
     TermClass getClassById(Integer id);
 
@@ -37,17 +43,35 @@ public interface DbDao {
     @Query("SELECT * FROM assessment WHERE assessment.id == :id")
     Assessment getAssessmentById(Integer id);
 
-    @Insert
+    @Query("SELECT * FROM ScheduledNotification")
+    List<ScheduledNotification> getAllNotifications();
+
+    @Query("SELECT * FROM ScheduledNotification WHERE UUIDofCaller == :UUID")
+    List<ScheduledNotification> getNotificationsByUUID(String UUID);
+
+    @Query("DELETE FROM ScheduledNotification WHERE UUIDofCaller == :UUID AND requestCode == :requestCode")
+    void deleteNotificationByUUIDAndRequestCode(String UUID, Integer requestCode);
+
+    @Query("SELECT* FROM Goal WHERE assessmentId == :id")
+    LiveData<List<Goal>> getGoalsByAssessmentId(Integer id);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTerm(Term term);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertClass(TermClass termClass);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAssessment(Assessment assessment);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMentor(Mentor mentor);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertGoal(Goal... goals);
+
+    @Insert
+    void insertNotification(ScheduledNotification... scheduledNotifications);
 
     @Update
     void updateTerm(Term term);
@@ -70,5 +94,12 @@ public interface DbDao {
     @Delete
     void deleteAssessments(Assessment... assessments);
 
-    @Delete void deleteMentors(Mentor... mentors);
+    @Delete
+    void deleteMentors(Mentor... mentors);
+
+    @Delete
+    void deleteGoals(Goal... goals);
+
+    @Delete
+    void deleteNotifications(ScheduledNotification... scheduledNotifications);
 }

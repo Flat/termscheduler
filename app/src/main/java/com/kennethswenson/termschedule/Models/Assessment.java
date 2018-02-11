@@ -7,8 +7,6 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.kennethswenson.termschedule.Adapters.AssessmentTypeConverter;
 
-import java.time.ZonedDateTime;
-
 @Entity(foreignKeys = @ForeignKey(entity = TermClass.class,
                                     parentColumns = "id",
                                     childColumns = "classId",

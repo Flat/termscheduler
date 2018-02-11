@@ -10,4 +10,16 @@
     <string name="notes">Notes</string>
     <string name="mentors">Mentors</string>
     <string name="class_name">Class Name</string>
+    <string name="status">Status:</string>
+    <string name="class_icon">class icon</string>
+    <string name="edit">Edit</string>
+    <string name="AssessmentTitle">Assessment Title</string>
+    <string name="goalname">Goal Name</string>
+    <string name="MentorName">Mentor Name</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="type">Type:</string>
+    <string name="share">Share</string>
+    <string name="welcome">Welcome to Term Scheduler!</string>
+    <string name="start">Start</string>
 </resources>

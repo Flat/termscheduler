@@ -1,13 +1,13 @@
 package com.kennethswenson.termschedule;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +27,14 @@ public class TermAddActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_term_layout);
+        setSupportActionBar(findViewById(R.id.toolbar));
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        if (actionBar != null) {
+            actionBar.setTitle("Add Term");
+        }
         SchedulerDatabase schedulerDatabase = SchedulerDatabase.getSchedulerDatabase(getApplicationContext());
         Button btnSave = findViewById(R.id.btnSave);
         Button btnCancel = findViewById(R.id.btnCancel);
@@ -37,24 +45,20 @@ public class TermAddActivity extends AppCompatActivity {
         DateTimeFormatter dtf = Formatting.getDateTimeFormat();
         startDate.setText(now.format(dtf));
         endDate.setText(now.format(dtf));
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("Add Term");
-        }
 
         DatePickerDialog.OnDateSetListener startDateListener, endDateListener;
 
-        startDateListener = (datePicker, i, i1, i2) -> startDate.setText(LocalDate.parse(i + "/" + i1 + "/" + i2, DateTimeFormatter.ofPattern("yyyy/L/d")).atStartOfDay(ZoneId.systemDefault()).format(Formatting.getDateTimeFormat()));
+        startDateListener = (datePicker, i, i1, i2) -> startDate.setText(LocalDate.parse(i + "/" + (i1 + 1) + "/" + i2, DateTimeFormatter.ofPattern("yyyy/L/d")).atStartOfDay(ZoneId.systemDefault()).format(Formatting.getDateTimeFormat()));
 
-        endDateListener = (datePicker, i, i1, i2) -> endDate.setText(LocalDate.parse(i + "/" + i1 + "/" + i2, DateTimeFormatter.ofPattern("yyyy/L/d")).atStartOfDay(ZoneId.systemDefault()).format(Formatting.getDateTimeFormat()));
+        endDateListener = (datePicker, i, i1, i2) -> endDate.setText(LocalDate.parse(i + "/" + (i1 + 1) + "/" + i2, DateTimeFormatter.ofPattern("yyyy/L/d")).atStartOfDay(ZoneId.systemDefault()).format(Formatting.getDateTimeFormat()));
 
         startDate.setOnClickListener(view -> {
-            DatePickerDialog dpd = new DatePickerDialog(this, startDateListener, now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+            DatePickerDialog dpd = new DatePickerDialog(this, startDateListener, now.getYear(), now.getMonthValue() -1, now.getDayOfMonth());
             dpd.show();
         });
 
         endDate.setOnClickListener(view -> {
-            DatePickerDialog dpd = new DatePickerDialog(this, endDateListener, now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+            DatePickerDialog dpd = new DatePickerDialog(this, endDateListener, now.getYear(), now.getMonthValue() -1, now.getDayOfMonth());
             dpd.show();
         });
 
@@ -66,7 +70,16 @@ public class TermAddActivity extends AppCompatActivity {
             }
         });
         btnCancel.setOnClickListener(view -> {
-            finishActivity(0);
+            finish();
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

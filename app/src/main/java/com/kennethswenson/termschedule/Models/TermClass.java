@@ -8,6 +8,7 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.kennethswenson.termschedule.Adapters.ClassStatusTypeConverter;
 import com.kennethswenson.termschedule.Adapters.ZonedDateTimeTypeConverter;
+import com.kennethswenson.termschedule.utils.PreferencesHelper;
 
 import java.time.ZonedDateTime;
 
@@ -16,6 +17,7 @@ import java.time.ZonedDateTime;
 public class TermClass {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
+    private String UUID;
     private Integer termId;
     private String title;
     private ZonedDateTime startDate;
@@ -23,18 +25,15 @@ public class TermClass {
     @TypeConverters(ClassStatusTypeConverter.class)
     private ClassStatus classStatus;
     private String notes;
-    private boolean startNotification;
-    private boolean endNotification;
 
-    public TermClass(Integer termId, String title, ZonedDateTime startDate, ZonedDateTime endDate, ClassStatus classStatus, String notes, boolean startNotification, boolean endNotification) {
+    public TermClass(Integer termId, String title, ZonedDateTime startDate, ZonedDateTime endDate, ClassStatus classStatus, String notes) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.classStatus = classStatus;
         this.notes = notes;
-        this.startNotification = startNotification;
-        this.endNotification = endNotification;
+        this.UUID = PreferencesHelper.getUUID();
     }
 
     public Integer getId() {
@@ -69,14 +68,6 @@ public class TermClass {
         return notes;
     }
 
-    public boolean getStartNotification() {
-        return startNotification;
-    }
-
-    public boolean getEndNotification() {
-        return endNotification;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -101,14 +92,13 @@ public class TermClass {
         this.notes = notes;
     }
 
-    public void setStartNotification(boolean startNotification) {
-        this.startNotification = startNotification;
+    public String getUUID() {
+        return UUID;
     }
 
-    public void setEndNotification(boolean endNotification) {
-        this.endNotification = endNotification;
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
     }
-
 
     @Override
     public String toString() {

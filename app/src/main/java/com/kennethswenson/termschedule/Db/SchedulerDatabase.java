@@ -8,8 +8,10 @@ import android.content.Context;
 @Database(entities = {com.kennethswenson.termschedule.Models.Term.class,
         com.kennethswenson.termschedule.Models.Assessment.class,
         com.kennethswenson.termschedule.Models.TermClass.class,
-        com.kennethswenson.termschedule.Models.Mentor.class},
-        version = 1, exportSchema = false)
+        com.kennethswenson.termschedule.Models.Mentor.class,
+        com.kennethswenson.termschedule.Models.ScheduledNotification.class,
+        com.kennethswenson.termschedule.Models.Goal.class},
+        version = 2, exportSchema = false)
 public abstract class SchedulerDatabase extends RoomDatabase {
     private static SchedulerDatabase schedulerDatabase;
     public abstract DbDao dbDao();

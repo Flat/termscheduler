@@ -13,4 +13,13 @@ public enum AssessmentType {
     public int getEnumnum() {
         return enumnum;
     }
+
+    @Override
+    public String toString() {
+        if (enumnum == 0){
+            return "Objective";
+        } else {
+            return "Performance";
+        }
+    }
 }

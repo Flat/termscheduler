@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = @ForeignKey(entity = TermClass.class, parentColumns = "id", childColumns = "classId", onDelete = ForeignKey.RESTRICT))
+@Entity(foreignKeys = @ForeignKey(entity = TermClass.class, parentColumns = "id", childColumns = "classId", onDelete = ForeignKey.CASCADE))
 public class Mentor {
     @PrimaryKey(autoGenerate = true)
     private Integer id;
@@ -58,5 +58,10 @@ public class Mentor {
 
     public void setClassId(Integer classId) {
         this.classId = classId;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

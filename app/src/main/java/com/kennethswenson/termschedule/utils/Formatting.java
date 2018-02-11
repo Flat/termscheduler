@@ -5,6 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Formatting {
     public static DateTimeFormatter getDateTimeFormat(){
-        return DateTimeFormatter.ofPattern("eee L dd, yyyy");
+        return DateTimeFormatter.ofPattern("eee LLL dd, yyyy");
     }
 }

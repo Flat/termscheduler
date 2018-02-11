@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TermSchedule.iml" filepath="$PROJECT_DIR$/TermSchedule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file:///media/hikoboshi/dev/termscheduler/app/app.iml" filepath="/media/hikoboshi/dev/termscheduler/app/app.iml" />
+      <module fileurl="file:///media/hikoboshi/dev/termscheduler/termscheduler.iml" filepath="/media/hikoboshi/dev/termscheduler/termscheduler.iml" />
     </modules>
   </component>
 </project>
